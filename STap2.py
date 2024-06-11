@@ -2,7 +2,6 @@ import streamlit as st
 import xgboost as xgb
 import numpy as np
 import pandas as pd
-import pickle
 import os
 
 # Get the directory of the script
@@ -62,5 +61,8 @@ input_data = {
 
 # Make prediction when button is clicked
 if st.button('Predict'):
-    prediction = predict(input_data)
-    st.write(f'The predicted UCS value is: {prediction}')
+    if cem_type == 'None':
+        st.write('Please select a cement type to make a prediction.')
+    else:
+        prediction = predict(input_data)
+        st.write(f'The predicted UCS value is: {prediction}')
