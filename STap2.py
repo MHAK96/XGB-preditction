@@ -18,7 +18,7 @@ def predict(input_data):
     return prediction[0]
 
 # Streamlit app
-st.title('XGBoost Model Prediction for the strength of cement-treated soils')
+st.title('Estimation of the UCS of cement-treated soils using XGBoost model')
 
 # Create two columns
 col1, col2 = st.columns(2)
