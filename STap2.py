@@ -35,7 +35,7 @@ with col2:
     C = st.number_input('C (Cement dosage)', min_value=0.0, max_value=10.0, value=6.0)
     T = st.number_input('T (Curing time)', min_value=0.0, max_value=90.0, value=28.0)
     nCiv = st.number_input('η/Civ (porosity to volumetric cement content ratio)', min_value=0.0, max_value=50.0, value=12.0)
-    cem_type = st.selectbox('Select Cement Type', ['None', 'CEM_I', 'CEM_II', 'CEM_III'])
+    cem_type = st.selectbox('Select Cement Type', ['None', 'CEM-I', 'CEM-II', 'CEM-III'])
 
 # Initialize CEM values
 CEM_I = 0
