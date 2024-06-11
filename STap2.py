@@ -3,7 +3,6 @@ import xgboost as xgb
 import numpy as np
 import pandas as pd
 import pickle
-import xgboost as xgb
 import os
 
 # Get the directory of the script
@@ -23,18 +22,29 @@ def predict(input_data):
 st.title('XGBoost Model Prediction for the strength of cement-treated soils')
 
 # Input fields for continuous features
-LL = st.number_input('LL (Liquid limit)', min_value=0.0, max_value=100.0, value=50.0)
-FC = st.number_input('FC (Fine contents)', min_value=0.0, max_value=100.0, value=30.0)
-ρnorm = st.number_input('ρnorm (Normalized dry density)', min_value=0.5, max_value=1.5, value=0.8)
-ωnorm = st.number_input('ωnorm (Normalized water content)', min_value=0.5, max_value=1.5, value=0.9)
+LL = st.number_input('LL (Liquid Limit)', min_value=0.0, max_value=100.0, value=50.0)
+FC = st.number_input('FC (Fine Contents)', min_value=0.0, max_value=100.0, value=30.0)
+ρnorm = st.number_input('ρnorm (Normalized Dry Density)', min_value=0.5, max_value=1.5, value=0.8)
+ωnorm = st.number_input('ωnorm (Normalized Water Content)', min_value=0.5, max_value=1.5, value=0.9)
 C = st.number_input('C (Cement dosage)', min_value=0.0, max_value=10.0, value=6.0)
 T = st.number_input('T (Curing time)', min_value=0.0, max_value=90.0, value=28.0)
-nCiv = st.number_input('η/Civ (Porosity to volumetric cement content ratio)', min_value=0.0, max_value=50.0, value=12.0)
+nCiv = st.number_input('η/Civ (porosity to volumetric cement content ratio)', min_value=0.0, max_value=50.0, value=12.0)
 
-# Input fields for binary features
-CEM_I = st.selectbox('CEM_I', [0, 1])
-CEM_II = st.selectbox('CEM_II', [0, 1])
-CEM_III = st.selectbox('CEM_III', [0, 1])
+# Dropdown for CEM types
+cem_type = st.selectbox('Select Cement Type', ['None', 'CEM_I', 'CEM_II', 'CEM_III'])
+
+# Initialize CEM values
+CEM_I = 0
+CEM_II = 0
+CEM_III = 0
+
+# Set the selected CEM type
+if cem_type == 'CEM_I':
+    CEM_I = 1
+elif cem_type == 'CEM_II':
+    CEM_II = 1
+elif cem_type == 'CEM_III':
+    CEM_III = 1
 
 # Prepare input data
 input_data = {
@@ -48,7 +58,6 @@ input_data = {
     'C': C,
     'T': T,
     'nCiv': nCiv,
-
 }
 
 # Make prediction when button is clicked
